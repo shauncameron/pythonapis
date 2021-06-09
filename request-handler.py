@@ -1,4 +1,5 @@
 from ReMark.remark import compile
+from Egg import createID, Egg
 import flask
 from flask import request
 import sqlite3
@@ -26,7 +27,7 @@ def authAPIID():
 
         """ check auth id """
 
-        if request.args['key'] == '0x1019-1093-5738-1092-1825':
+        if request.args['key'] in open('api.keys', 'r').read().split('\n'):
 
             return True
 
@@ -47,11 +48,17 @@ def api_remark():
 
         if 'string' in request.args:
 
-            compilation = compile(request.args['string'], None, True)
+            try:
 
-            if 'wrap' in request.args and request.args['wrap'] == 'true':
+                compilation = compile(request.args['string'], None, True)
 
-                return compilation
+                if 'wrap' in request.args and request.args['wrap'] == 'true':
+
+                    return compilation
+
+            except:
+
+                return '<p style="color:red;">Python Exception</p>'
 
             else:
 
@@ -64,5 +71,76 @@ def api_remark():
     else:
 
         return result
+
+# Scrambling
+
+@app.route('/api/egg', methods=['GET'])
+def api_eggs():
+
+    result = authAPIID()
+
+    if result == True:
+
+        if 'createuid' in request.args:
+
+            try:
+
+                return createID()
+
+            except:
+
+                return '{"error": "notprocessed2"}'
+
+        elif 'encrypt' in request.args:
+
+            if 'with' in request.args:
+
+                try:
+
+                    return Egg(request.args['with']).decrypt(request.args['encrypt'])
+
+                except:
+
+                    return '{"error": "notprocessed3"}'
+
+            else:
+
+                return '{"error": "notprocessed4"}'
+
+        elif 'decrypt' in request.args:
+
+            if 'with' in request.args:
+
+                try:
+
+                    return Egg(request.args['with']).decrypt(request.args['decrypt'])
+
+                except:
+
+                    return '{"error": "notprocessed5"}'
+
+            else:
+
+                return '{"error": "notprocessed6"}'
+
+        else:
+
+            return '{"error": "notprocessed1"}'
+
+    else:
+
+        return '{"error": "notprocessed"}'
+
+@app.route('/', methods=['GET'])
+def index():
+
+    return '<p style="color:red;"><b> index not valid </b></p>'
+
+
+@app.route('/api', methods=['GET'])
+def api():
+    return '<p style="color:red;"><b> base api not valid </b></p>'
+
+# http://localhost:5000/api/egg?key=0x=m|Z%C3%82%C2%AC/%22GhZk@9_i%22Eb`Wh^dV7eh{%C3%82%C2%A3vY]&
 
 app.run()
