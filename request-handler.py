@@ -93,7 +93,7 @@ def api_eggs():
 
                 try:
 
-                    return Egg(request.args['with']).decrypt(request.args['encrypt'])
+                    return Egg(request.args['with']).encrypt(request.args['encrypt'])
 
                 except:
 
