@@ -2,10 +2,6 @@ from ReMark.remark import compile
 from Egg import createID, Egg
 import flask
 from flask import request
-import sqlite3
-
-connection = sqlite3.connect('remark-api.db')
-cursor = connection.cursor()
 
 """ 
 Private License (Copyright Shaun Cameron)
@@ -142,5 +138,6 @@ def api():
     return '<p style="color:red;"><b> base api not valid </b></p>'
 
 # http://localhost:5000/api/egg?key=0x=m|Z%C3%82%C2%AC/%22GhZk@9_i%22Eb`Wh^dV7eh{%C3%82%C2%A3vY]&
+import socket
 
-app.run()
+app.run(host=socket.gethostbyname(socket.gethostname()), port=80) # Default http/s port
