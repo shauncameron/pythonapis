@@ -13,12 +13,13 @@ requires: Flask, ReMark [ Regex ], remark [ ReMark, yaml ]
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
+
 def openread(file):
 
     return open(file, 'r').read()
 
-def authAPIID():
 
+def authAPIID():
     if 'key' in request.args:
 
         """ check auth id """
@@ -29,15 +30,15 @@ def authAPIID():
 
         else:
 
-            return '<p style="color:red;"> API call made with <b> invalid key </b> header </p>'
+            return '<p style="color:red;"> API call made with <b>invalid key</b> header </p>'
 
     else:
 
-        return '<p style="color:red;"> API call made without <b> key </b> header </p>'
+        return '<p style="color:red;"> API call made without <b>key</b> header </p>'
+
 
 @app.route('/api/remark/', methods=['GET'])
 def api_remark():
-
     result = authAPIID()
 
     if result == True:
@@ -49,7 +50,6 @@ def api_remark():
                 compilation = compile(request.args['string'], None, True)
 
                 if 'wrap' in request.args and request.args['wrap'] == 'true':
-
                     return compilation
 
             except:
@@ -68,11 +68,11 @@ def api_remark():
 
         return result
 
+
 # Scrambling
 
 @app.route('/api/egg', methods=['GET'])
 def api_eggs():
-
     result = authAPIID()
 
     if result == True:
@@ -83,9 +83,9 @@ def api_eggs():
 
                 return createID()
 
-            except:
+            except Exception as e:
 
-                return '{"error": "notprocessed2"}'
+                return '<p style="color:red;">Python Exception', e, '</p>'
 
         elif 'encrypt' in request.args:
 
@@ -93,15 +93,15 @@ def api_eggs():
 
                 try:
 
-                    return Egg(request.args['with']).encrypt(request.args['encrypt'])
+                    return Egg(request.args['with']).decrypt(request.args['encrypt'])
 
-                except:
+                except Exception as e:
 
-                    return '{"error": "notprocessed3"}'
+                    return '<p style="color:red;">Python Exception', e, '</p>'
 
             else:
 
-                return '{"error": "notprocessed4"}'
+                return '<p style="color:red;">Missing "with" header argument</p>'
 
         elif 'decrypt' in request.args:
 
@@ -111,33 +111,36 @@ def api_eggs():
 
                     return Egg(request.args['with']).decrypt(request.args['decrypt'])
 
-                except:
+                except Exception as e:
 
-                    return '{"error": "notprocessed5"}'
+                    return '<p style="color:red;">Python Exception', e, '</p>'
 
             else:
 
-                return '{"error": "notprocessed6"}'
+                return '<p style="color:red;">Missing "with" header argument</p>'
 
         else:
 
-            return '{"error": "notprocessed1"}'
+            return '<p style="color:red;">Call to egg but not specifying (encrypt|decrypt|creatuid)</p>'
 
     else:
 
-        return '{"error": "notprocessed"}'
+        return result
+
 
 @app.route('/', methods=['GET'])
 def index():
-
     return '<p style="color:red;"><b> index not valid </b></p>'
 
 
 @app.route('/api', methods=['GET'])
 def api():
+
     return '<p style="color:red;"><b> base api not valid </b></p>'
 
-# http://localhost:5000/api/egg?key=0x=m|Z%C3%82%C2%AC/%22GhZk@9_i%22Eb`Wh^dV7eh{%C3%82%C2%A3vY]&
-import socket
 
-app.run(host=socket.gethostbyname(socket.gethostname()), port=80) # Default http/s port
+# Start server default http/s port -> 80
+
+from socket import gethostname, gethostbyname
+
+app.run(host=gethostbyname(gethostname()), port=5000)

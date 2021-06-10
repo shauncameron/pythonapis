@@ -26,8 +26,7 @@ class Compiler:
 
             elif token.type == 'comment':
 
-                # No need to add comments
-                pass
+                text += '<a hidden>' + token.value[0] + '</a>'
 
             elif token.type == 'nullstring':
 
@@ -137,8 +136,8 @@ class Compiler:
 
                 text += token.value[0].lstrip()
 
-            elif token.type == 'gary':
+            elif token.type == 'colour':
 
-                text += '<a style="color:gold;"><b><i><u>' + token.value + '</u></i></b></a>'
+                text += '<a style="color:#' + token.value[0] + ';">' + token.value[1] + '</a>'
 
         return text

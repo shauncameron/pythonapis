@@ -1,5 +1,4 @@
 # General
-gary: "^(?i)gary kong"
 # Utility
 newline: "^\n"
 spoiler: '^\?\[([a-zA-Z0-9 _\-+]*?)\]\(([^)]*?)\)'
@@ -8,7 +7,7 @@ hyperlink: '^\[([a-zA-Z0-9 _\-+]*?)\]\(([^)]*?)\)' # Make more secure hyperlink?
 noremark: '^<\?noremark([\s\S]*?)\?>'
 html: '<\?html([\s\S]*?)\?>'
 css: '^<\?css([\s\S]*?)\?>'
-comment: '^\/\*[\S\s]*\*\/'
+comment: '^\/\*([\S\s]*)\*\/'
 # Font
 bold: '^\*\*'
 italics: '^\*'
@@ -17,4 +16,5 @@ underline: '^__'
 crossthrough: '^~~'
 codeblock: '^```'
 code: '^`'
+colour: '^\/#([a-f0-9]{6})(.+?)#\/'
 illegal: '^<[\s\S]*?>'
