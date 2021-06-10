@@ -143,4 +143,4 @@ def api():
 
 from socket import gethostname, gethostbyname
 
-app.run(host=gethostbyname(gethostname()), port=5000)
+app.run(host=gethostbyname(gethostname()), port=80)
