@@ -126,6 +126,65 @@ def api_eggs():
     else:
 
         return result
+    
+def jsonerror(string: str):
+
+    return json.dumps({"response": "0","response-type": "error", "error": string})
+
+@app.route('/api/dnd/npcmaker')
+def npcmaker():
+
+    headers = request.args
+
+    base = result = {"response": "1", "response-type": "result"}
+
+    if 'name' in headers:
+
+        amount = headers['name']
+        
+        if amount.isnumeric():
+
+            if ( a:= int(amount)) > 0:
+
+                result["name"] = makename(a)
+
+            else:
+
+                return jsonerror('name amount must be integer above 0')
+
+        else:
+
+            return jsonerror('name amount must be number')
+
+    if 'appearance' in headers:
+
+        result["appearance"] = maketraits()
+
+    if 'race' in headers:
+
+        result["race"] = random.choice(race)
+
+    if 'sex' in headers:
+
+        result["sex"] = random.choice(['M', 'F', 'NB', '?'])
+
+    if 'allegiance' in headers:
+
+        result["allegiance"] = random.choice(politics)
+
+    if 'alignment' in headers:
+
+        result["alignment"] = makealignment()
+
+    if 'class' in headers:
+
+        result["class"] = random.choice(classes) 
+
+    if len(result) == 2:
+
+        return jsonerror('result was not influenced by any parameters. Likely due to a/ bad header/s')
+
+    return json.dumps(result)
 
 
 @app.route('/', methods=['GET'])
