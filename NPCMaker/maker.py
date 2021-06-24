@@ -65,7 +65,7 @@ for i, classx in enumerate(classes):
 
 races = ["Dragonborn", "Tiefling", "Human", "Elf", "Half-Elf", "Dark-Elf", "High-Elf", "Orc", "Half-Orc", "Dwarf", "Half-Dwarf", "Halfling", "Gnome", "Half-Giant", "Half-Fey", "Half-Sprite", "Half-Sprit", "Human", "Half-Human", "Forgotten-Human", "Genasi", "Half-Dragonborn"]
 
-Politics = ["Country Guild", "Country Army", "None", "None", "Country Family", "Royal Family", "Country Family Army", "Own Family", "Self", "Friends"]
+allegiance = ["Country Guild", "Country Army", "None", "None", "Country Family", "Royal Family", "Country Family Army", "Own Family", "Self", "Friends"]
 
 
 def makepeople(amount):
