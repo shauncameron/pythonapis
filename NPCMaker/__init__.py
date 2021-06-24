@@ -1,1 +1,1 @@
-from NPCMAker.maker import *
+from NPCMaker.maker import *
