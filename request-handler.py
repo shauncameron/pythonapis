@@ -172,7 +172,7 @@ def npcmaker():
 
     if 'allegiance' in headers:
 
-        result["allegiance"] = random.choice(politics)
+        result["allegiance"] = random.choice(allegiance)
 
     if 'alignment' in headers:
 
