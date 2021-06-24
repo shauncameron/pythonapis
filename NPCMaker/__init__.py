@@ -1,0 +1,1 @@
+from NPCMAker.maker import *
