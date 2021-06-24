@@ -164,7 +164,7 @@ def npcmaker():
 
     if 'race' in headers:
 
-        result["race"] = random.choice(race)
+        result["race"] = random.choice(races)
 
     if 'sex' in headers:
 
