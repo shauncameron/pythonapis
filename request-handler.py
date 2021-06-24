@@ -1,5 +1,6 @@
 from ReMark.remark import compile
 from Egg import createID, Egg
+from NPCMaker import *
 import flask
 from flask import request
 import json
