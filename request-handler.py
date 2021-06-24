@@ -2,6 +2,7 @@ from ReMark.remark import compile
 from Egg import createID, Egg
 import flask
 from flask import request
+import json
 
 """ 
 Private License (Copyright Shaun Cameron)
